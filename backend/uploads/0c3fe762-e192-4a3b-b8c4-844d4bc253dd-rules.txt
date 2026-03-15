@@ -1,0 +1,28 @@
+TITLE_FONT=Times New Roman
+TITLE_SIZE=18
+TITLE_BOLD=true
+TITLE_ALIGN=center
+
+META_FONT=Times New Roman
+META_SIZE=12
+META_ALIGN=left
+
+HEADING_FONT=Times New Roman
+HEADING_SIZE=14
+HEADING_BOLD=true
+HEADING_ALIGN=left
+
+BODY_FONT=Times New Roman
+BODY_SIZE=12
+BODY_ALIGN=justify
+LINE_SPACING=single
+
+FOOTER_FONT=Times New Roman
+FOOTER_SIZE=12
+FOOTER_ALIGN=center
+
+SECTION_KEYWORDS=Introduction,System Architecture
+
+META_KEYWORDS=Batch:,Guide:
+
+FOOTER_KEYWORD=Department of Computer Science and Engineering

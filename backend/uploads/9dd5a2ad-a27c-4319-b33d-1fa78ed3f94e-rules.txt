@@ -1,0 +1,9 @@
+TITLE -> Times New Roman 16 Bold Center
+
+HEADING1 -> Times New Roman 14 Bold Center
+
+BODY -> Times New Roman 12 Justify
+
+KEYWORDS -> Times New Roman 12 Italic Left
+
+FOOTER -> Times New Roman 12 Bold Center

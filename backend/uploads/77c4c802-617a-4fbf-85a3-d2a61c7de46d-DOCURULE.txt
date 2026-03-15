@@ -1,0 +1,11 @@
+DOCURULE
+Batch: 2023–2027
+Guide: Dr. M. Sathish
+
+Introduction
+This project focuses on automatic document formatting using rule based techniques. The goal is to reduce manual effort and ensure consistent layout.
+
+System Architecture
+The system contains rule parser, document parser, detection engine and formatting engine modules.
+
+Department of Computer Science and Engineering
