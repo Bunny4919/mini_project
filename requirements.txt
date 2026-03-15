@@ -1,0 +1,60 @@
+# ==============================================================================
+# Automated Rule-Based Document Correction System - Requirements
+# ==============================================================================
+
+# 1. System Requirements
+# ------------------------------------------------------------------------------
+# Node.js: >= 18.x recommended (LTS)
+# PostgreSQL: >= 14.x (For backend database storage)
+
+# 2. Main Backend Dependencies (Node.js/Express)
+# ------------------------------------------------------------------------------
+# Authentication & Security
+bcryptjs>=3.0.3
+jsonwebtoken>=9.0.3
+
+# Core Middleware
+express>=4.18.2
+cors>=2.8.5
+dotenv>=17.3.1
+multer>=1.4.5-lts.1
+
+# Document Processing & Parsing
+mammoth>=1.6.0
+pdf-parse>=1.1.1
+docx>=8.5.0
+pdfkit>=0.14.0
+
+# NLP & Language Tools
+nspell>=2.1.5
+dictionary-en>=4.0.0
+
+# Database & Utilities
+pg>=8.20.0
+uuid>=9.0.0
+
+# 3. Frontend Dependencies (React/Vite)
+# ------------------------------------------------------------------------------
+# Core Framework
+react>=18.2.0
+react-dom>=18.2.0
+react-router-dom>=7.13.1
+
+# UI & Animation
+lucide-react>=0.577.0
+framer-motion>=12.35.2
+gsap>=3.14.2
+three>=0.183.2
+clsx>=2.1.1
+tailwind-merge>=3.5.0
+class-variance-authority>=0.7.1
+@radix-ui/react-slot>=1.2.4
+
+# 4. Global Setup Instructions
+# ------------------------------------------------------------------------------
+# 1. Install Node.js and PostgreSQL.
+# 2. Setup environment variables in backend/.env (see backend/.env.example).
+# 3. Install backend dependencies: cd backend && npm install
+# 4. Install frontend dependencies: cd frontend && npm install
+# 5. Start backend: cd backend && npm run dev
+# 6. Start frontend: cd frontend && npm run dev
