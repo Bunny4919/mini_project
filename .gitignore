@@ -1,0 +1,31 @@
+# Dependencies
+node_modules/
+
+# Environment variables — NEVER commit these
+backend/.env
+.env
+
+# Frontend build output
+frontend/dist/
+
+# Uploaded/exported files (user data)
+backend/uploads/*
+backend/exports/*
+!backend/uploads/.gitkeep
+!backend/exports/.gitkeep
+
+# Logs
+*.log
+npm-debug.log*
+logs/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+
+# PM2 logs
+.pm2/

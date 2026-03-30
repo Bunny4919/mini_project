@@ -1,6 +1,8 @@
 require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
+const helmet = require('helmet');
+const rateLimit = require('express-rate-limit');
 const multer = require('multer');
 const path = require('path');
 const fs = require('fs');
@@ -23,13 +25,48 @@ const PORT = process.env.PORT || 3001;
 // MIDDLEWARE SETUP
 // ============================================
 
+// Security headers via Helmet
+app.use(helmet());
+
 // CORS configuration
+const allowedOrigin = process.env.CORS_ORIGIN || 'http://localhost:5173';
 app.use(cors({
-  origin: process.env.CORS_ORIGIN || '*',
+  origin: (origin, callback) => {
+    // Allow requests with no origin (e.g. mobile apps, curl)
+    if (!origin) return callback(null, true);
+    if (allowedOrigin === '*' || origin === allowedOrigin) {
+      return callback(null, true);
+    }
+    return callback(new Error(`CORS: origin '${origin}' not allowed`));
+  },
   methods: ['GET', 'POST', 'DELETE'],
   allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true
 }));
+
+// ============================================
+// RATE LIMITING
+// ============================================
+
+// General API rate limit: 100 requests per 15 minutes per IP
+const generalLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 100,
+  standardHeaders: true,
+  legacyHeaders: false,
+  message: { error: 'Too Many Requests', message: 'Too many requests, please try again in 15 minutes.' }
+});
+
+// Strict rate limit for auth routes: 10 requests per 15 minutes per IP
+const authLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 10,
+  standardHeaders: true,
+  legacyHeaders: false,
+  message: { error: 'Too Many Requests', message: 'Too many login/register attempts, please try again in 15 minutes.' }
+});
+
+app.use('/api/', generalLimiter);
 
 // Parse JSON bodies
 app.use(express.json({ limit: '10mb' }));
@@ -43,8 +80,8 @@ app.use((req, res, next) => {
   next();
 });
 
-// Auth routes (no auth required for register/login)
-app.use('/api/auth', authRoutes);
+// Auth routes — apply strict rate limit
+app.use('/api/auth', authLimiter, authRoutes);
 
 // ============================================
 // DIRECTORY SETUP
@@ -622,7 +659,20 @@ app.use((req, res) => {
 
 // Global error handler
 app.use((err, req, res, next) => {
+  const isProd = process.env.NODE_ENV === 'production';
+
+  // Always log full error server-side
   console.error(`[${req.requestId}] Error:`, err.message);
+  if (!isProd) console.error(err.stack);
+
+  // Handle CORS errors
+  if (err.message && err.message.startsWith('CORS:')) {
+    return res.status(403).json({
+      error: 'Forbidden',
+      message: isProd ? 'Origin not allowed' : err.message,
+      requestId: req.requestId
+    });
+  }
 
   // Handle validation errors
   if (err instanceof ValidationError) {
@@ -642,10 +692,10 @@ app.use((err, req, res, next) => {
     });
   }
 
-  // Handle other errors
+  // Handle other errors — hide details in production
   res.status(err.status || 500).json({
     error: err.name || 'Internal Server Error',
-    message: err.message || 'An unexpected error occurred',
+    message: isProd ? 'An unexpected error occurred' : (err.message || 'An unexpected error occurred'),
     requestId: req.requestId
   });
 });
@@ -653,6 +703,27 @@ app.use((err, req, res, next) => {
 // ============================================
 // SERVER STARTUP
 // ============================================
+
+// ============================================
+// SERVER STARTUP
+// ============================================
+
+let server; // declared here so SIGTERM handler can access it
+
+function startServer() {
+  server = app.listen(PORT, () => {
+    console.log(`
+╔═══════════════════════════════════════════════════════════╗
+║     Document Formatter Pro - Backend Server               ║
+╠═══════════════════════════════════════════════════════════╣
+║  Server running on: http://localhost:${PORT}                 ║
+║  Environment: ${process.env.NODE_ENV || 'development'}                            ║
+║  Session timeout: ${SESSION_TIMEOUT / 1000 / 60} minutes                            ║
+║  Auth: PostgreSQL + JWT                                   ║
+╚═══════════════════════════════════════════════════════════╝
+    `);
+  });
+}
 
 // Start server after DB is ready
 initDatabase()
@@ -663,28 +734,29 @@ initDatabase()
     startServer();
   });
 
-function startServer() {
-const server = app.listen(PORT, () => {
-  console.log(`
-╔═══════════════════════════════════════════════════════════╗
-║     Document Formatter Pro - Backend Server               ║
-╠═══════════════════════════════════════════════════════════╣
-║  Server running on: http://localhost:${PORT}                 ║
-║  Environment: ${process.env.NODE_ENV || 'development'}                            ║
-║  Session timeout: ${SESSION_TIMEOUT / 1000 / 60} minutes                            ║
-║  Auth: PostgreSQL + JWT                                   ║
-╚═══════════════════════════════════════════════════════════╝
-  `);
-});
-}
-
 // Graceful shutdown
 process.on('SIGTERM', () => {
   console.log('SIGTERM received. Shutting down gracefully...');
-  server.close(() => {
-    console.log('Server closed.');
+  if (server) {
+    server.close(() => {
+      console.log('Server closed.');
+      process.exit(0);
+    });
+  } else {
     process.exit(0);
-  });
+  }
+});
+
+process.on('SIGINT', () => {
+  console.log('SIGINT received. Shutting down gracefully...');
+  if (server) {
+    server.close(() => {
+      console.log('Server closed.');
+      process.exit(0);
+    });
+  } else {
+    process.exit(0);
+  }
 });
 
 module.exports = app;

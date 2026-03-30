@@ -1,21 +1,180 @@
+# SMARTCAL DOCUMENT FORMATTING RULES
+# Generated for SmartCal Final Report - Existing System Analysis
+# Based on Academic Project Report Standards
+
+# ============================================================================
+# TITLE FORMATTING (Cover Page & Section Titles)
+# ============================================================================
 TITLE_FONT=Times New Roman
 TITLE_SIZE=18
 TITLE_BOLD=true
 TITLE_ALIGN=center
-META_FONT=Arial
-META_SIZE=11
+TITLE_SPACING_BEFORE=240
+TITLE_SPACING_AFTER=240
+TITILE_KEYWORD=SMARTCAL: AN INTELLIGENT CALORIE TRACKER WITH COOKING-AWARE NUTRITION ANALYSIS
+
+# ============================================================================
+# METADATA FORMATTING (Date, Author, Guide, Batch Info)
+# ============================================================================
+META_FONT=Times New Roman
+META_SIZE=12
 META_ALIGN=left
-HEADING_FONT=Arial
+META_SPACING_BEFORE=120
+META_SPACING_AFTER=120
+META_BOLD=true
+
+# ============================================================================
+# HEADING FORMATTING (Section Headers like INTRODUCTION, LITERATURE SURVEY)
+# ============================================================================
+HEADING_FONT=Times New Roman
 HEADING_SIZE=14
-heading should be capital letters
 HEADING_BOLD=true
 HEADING_ALIGN=left
+HEADING_CASE=CAPITAL_LETTERS
+HEADING_SPACING_BEFORE=240
+HEADING_SPACING_AFTER=120
+
+# ============================================================================
+# SUBHEADING FORMATTING (Subsections like 1.1 Motivation, 2.1 Introduction)
+# ============================================================================
+SUBHEADING_FONT=Times New Roman
+SUBHEADING_SIZE=12
+SUBHEADING_BOLD=true
+SUBHEADING_ALIGN=left
+SUBHEADING_SPACING_BEFORE=180
+SUBHEADING_SPACING_AFTER=100
+
+# ============================================================================
+# BODY TEXT FORMATTING (Main paragraph content)
+# ============================================================================
 BODY_FONT=Times New Roman
 BODY_SIZE=12
 BODY_ALIGN=justify
-FOOTER_FONT=Arial
+BODY_SPACING_BEFORE=0
+BODY_SPACING_AFTER=120
+BODY_LINE_SPACING=1.5
+
+
+# ============================================================================
+# FOOTER FORMATTING
+# ============================================================================
+FOOTER_FONT=Times New Roman
 FOOTER_SIZE=10
 FOOTER_ALIGN=center
-SECTION_KEYWORDS=Introduction,Methodology,Results,Discussion,Conclusion,Abstract,References
-META_KEYWORDS=Batch:,Version:,Date:,Author:,Guide:
 FOOTER_KEYWORD=Page
+
+# ============================================================================
+# SECTION KEYWORDS (Main section headings to identify and format)
+# ============================================================================
+SECTION_KEYWORDS=INTRODUCTION,LITERATURE SURVEY,SYSTEM ANALYSIS,SYSTEM DESIGN,IMPLEMENTATION AND RESULTS,TESTING,CONCLUSION AND FUTURE ENHANCEMENT,REFERENCES
+
+# ============================================================================
+# SUBSECTION KEYWORDS (Keywords that identify subsections within sections)
+# ============================================================================
+SUBSECTION_KEYWORDS=Motivation,Problem Definition,Objective of Project,Limitation of Project,Introduction,Existing System,Proposed System,Functional Requirements,Non-Functional Requirements,Software Requirements,Hardware Requirements,Block Diagram Of The Proposed System,UML Diagrams,Modules,Method of Implementation,Algorithm and Flowcharts,Control Flow of the Implementation,Sample Code,Output Screens,Introduction to Testing,Types of Tests Considered,Various Test Case Scenarios Considered,Project Conclusion,Future Enhancement,Journals,Books,Sites
+
+# ============================================================================
+# METADATA KEYWORDS (Keywords for cover page and metadata sections)
+# ============================================================================
+META_KEYWORDS=Batch:,Version:,Date:,Author:,Guide:,Submitted By,Under the Guidance of
+
+# ============================================================================
+# SPECIAL SECTIONS (Fixed format sections)
+# ============================================================================
+SPECIAL_SECTIONS=CERTIFICATE,DECLARATION,ACKNOWLEDGEMENT,ABSTRACT,TABLE OF CONTENTS,LIST OF FIGURES,LIST OF TABLES,LIST OF ABBREVIATIONS
+
+# ============================================================================
+# MARGIN SETTINGS (in inches)
+# ============================================================================
+margin_top=1
+margin_bottom=1
+margin_left=1
+margin_right=1
+
+# ============================================================================
+# PAGE SETTINGS
+# ============================================================================
+page_size=A4
+page_orientation=portrait
+line_spacing=1.5
+
+# ============================================================================
+# TABLE FORMATTING
+# ============================================================================
+TABLE_FONT=Times New Roman
+TABLE_SIZE=11
+TABLE_ALIGN=center
+TABLE_BORDERS=all
+TABLE_HEADER_BOLD=true
+TABLE_HEADER_SHADING=CCCCCC
+
+# ============================================================================
+# LIST FORMATTING
+# ============================================================================
+LIST_FONT=Times New Roman
+LIST_SIZE=12
+LIST_TYPE=bullet
+LIST_INDENT=0.5
+
+# ============================================================================
+# SPECIAL FORMATTING RULES
+# ============================================================================
+
+# Cover page items - center aligned, single spacing
+COVER_ITEMS=Industry Oriented Mini Project Report,BACHELOR OF TECHNOLOGY,COMPUTER SCIENCE AND ENGINEERING,SCHOOL OF ENGINEERING,NALLA NARASIMHA REDDY,EDUCATION SOCIETY'S GROUP OF INSTITUTIONS,NALLA NARASIMHA REDDY EDUCATION SOCIETY'S GROUP OF INSTITUTIONS
+
+# Cover page alignment
+COVER_ALIGN=center
+COVER_SPACING=single
+
+# Certificate and Declaration - special formatting
+CERT_BOLD_TEXT=SMARTCAL: AN INTELLIGENT CALORIE TRACKER WITH COOKING-AWARE NUTRITION ANALYSIS,Bachelor of technology in Computer Science & Engineering,bonafide work
+
+# Keywords requiring special formatting
+EMPHASIZED_KEYWORDS=SmartCal,Nutritionix API,USDA FoodData Central API,Mifflin-St Jeor,BMR,TDEE,MET,Google Gemini AI,Next.js,PostgreSQL,Prisma ORM,NextAuth,Tailwind CSS
+
+# ============================================================================
+# ALIGNMENT CORRECTION RULES
+# ============================================================================
+
+# Fix alignment issues
+FIX_LEFT_ALIGN_SECTIONS=true
+FIX_CENTER_ALIGN_TITLE=true
+FIX_JUSTIFY_BODY=true
+FIX_INCONSISTENT_SPACING=true
+
+# ============================================================================
+# LINE SPACING CORRECTION RULES
+# ============================================================================
+
+# Standard line spacing for different sections
+COVER_PAGE_SPACING=1.0
+META_SECTION_SPACING=1.0
+ABSTRACT_SPACING=1.5
+BODY_TEXT_SPACING=1.5
+REFERENCES_SPACING=1.5
+
+# ============================================================================
+# PROCESSING PARAMETERS
+# ============================================================================
+
+# Apply to all sections
+apply_global_formatting=true
+preserve_content=true
+track_changes=true
+auto_correct_alignment=true
+auto_correct_spacing=true
+
+# ============================================================================
+# VALIDATION RULES
+# ============================================================================
+
+# Ensure all section keywords are in CAPITAL LETTERS
+validate_section_case=true
+validate_margin_consistency=true
+validate_font_consistency=true
+validate_alignment_consistency=true
+
+# ============================================================================
+# END OF RULES FILE
+# ============================================================================

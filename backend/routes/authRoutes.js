@@ -9,13 +9,16 @@ const router = express.Router();
 // ─────────────────────────────────────────────
 router.post('/register', async (req, res) => {
   try {
-    const { name, email, password } = req.body;
+    // Sanitize inputs
+    const name = (req.body.name || '').trim();
+    const email = (req.body.email || '').trim().toLowerCase();
+    const { password } = req.body;
 
     // Basic validation
-    if (!name || !name.trim()) {
+    if (!name) {
       return res.status(400).json({ error: 'Validation Error', message: 'Name is required' });
     }
-    if (!email || !email.trim()) {
+    if (!email) {
       return res.status(400).json({ error: 'Validation Error', message: 'Email is required' });
     }
     if (!password || password.length < 6) {
@@ -50,7 +53,9 @@ router.post('/register', async (req, res) => {
 // ─────────────────────────────────────────────
 router.post('/login', async (req, res) => {
   try {
-    const { email, password } = req.body;
+    // Sanitize inputs
+    const email = (req.body.email || '').trim().toLowerCase();
+    const { password } = req.body;
 
     if (!email || !password) {
       return res.status(400).json({ error: 'Validation Error', message: 'Email and password are required' });
@@ -75,7 +80,8 @@ router.post('/login', async (req, res) => {
       user: { id: user.id, name: user.name, email: user.email }
     });
   } catch (err) {
-    res.status(500).json({ error: 'Login Error', message: err.message });
+    const isProd = process.env.NODE_ENV === 'production';
+    res.status(500).json({ error: 'Login Error', message: isProd ? 'Login failed' : err.message });
   }
 });
 

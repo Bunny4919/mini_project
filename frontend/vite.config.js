@@ -18,5 +18,18 @@ export default defineConfig({
                 changeOrigin: true
             }
         }
+    },
+    build: {
+        outDir: 'dist',
+        sourcemap: false,            // don't expose source maps in production
+        chunkSizeWarningLimit: 1000, // warn at 1MB chunks
+        rollupOptions: {
+            output: {
+                // Split vendor libs into a separate chunk for better browser caching
+                manualChunks: {
+                    vendor: ['react', 'react-dom', 'react-router-dom']
+                }
+            }
+        }
     }
 })
