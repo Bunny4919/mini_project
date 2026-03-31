@@ -2024,6 +2024,18 @@ body::before {
   -webkit-text-fill-color: var(--text-primary);
 }
 
+.auth-input-wrap input:-webkit-autofill,
+.auth-input-wrap input:-webkit-autofill:hover,
+.auth-input-wrap input:-webkit-autofill:focus,
+.auth-input-wrap input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 1000px rgba(18, 18, 28, 0.95) inset !important;
+  box-shadow: 0 0 0 1000px rgba(18, 18, 28, 0.95) inset !important;
+  -webkit-text-fill-color: var(--text-primary) !important;
+  caret-color: var(--text-primary) !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
+  transition: background-color 5000s ease-in-out 0s;
+}
+
 .auth-input-wrap input::placeholder {
   color: var(--text-muted);
 }
